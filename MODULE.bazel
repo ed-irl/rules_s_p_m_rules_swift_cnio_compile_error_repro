@@ -1,0 +1,36 @@
+module(name = "irl_llc")
+
+bazel_dep(name = "apple_support", version = "1.15.1")
+bazel_dep(name = "rules_swift", version = "1.18.0")
+git_override(
+   module_name = "rules_swift",
+   commit = "8c144a2c28af3af7b78b5fd679550e6783a19194",  # Needed to pull in the patch for https://github.com/bazelbuild/rules_swift/issues/1204
+   remote = "https://github.com/bazelbuild/rules_swift",
+)
+
+bazel_dep(name = "rules_swift_package_manager", version = "0.30.0")
+git_override(
+    module_name = "rules_swift_package_manager",
+    commit = "fc086f7ce7feb7e31f689ddd6ddc8a9f1827f832",  #v0.30.0
+    patch_strip = 1,
+    patches = ["//third_party/rules_swift_package_manager:v3-support.patch"],
+    remote = "https://github.com/cgrindel/rules_swift_package_manager",
+)
+
+bazel_dep(name = "gazelle", version = "0.36.0")
+
+bazel_dep(name = "rules_apple", version = "3.5.1")
+
+# swift_deps START
+swift_deps = use_extension(
+    "@rules_swift_package_manager//:extensions.bzl",
+    "swift_deps",
+)
+swift_deps.from_file(
+    deps_index = "//:swift_deps_index.json",
+)
+use_repo(
+    swift_deps,
+    "swiftpkg_swift_nio",
+)
+# swift_deps END

@@ -1,0 +1,13 @@
+diff --git a/gazelle/internal/spreso/pin.go b/gazelle/internal/spreso/pin.go
+index 8aa0fc3..7f6d050 100644
+--- a/gazelle/internal/spreso/pin.go
++++ b/gazelle/internal/spreso/pin.go
+@@ -33,7 +33,7 @@ func NewPinsFromResolvedPackageJSON(b []byte) ([]*Pin, error) {
+ 			return nil, err
+ 		}
+ 		return NewPinsFromV1PinStore(&v1ps)
+-	case 2:
++	case 2, 3:
+ 		var v2ps V2PinStore
+ 		if err := json.Unmarshal(b, &v2ps); err != nil {
+ 			return nil, err

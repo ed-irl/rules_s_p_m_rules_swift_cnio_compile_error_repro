@@ -1,0 +1,16 @@
+output_artifacts
+.gitlab-ci-generated.yml
+*.terraform
+!.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.old
+.bazelbsp
+.ijwb
+bazel-bin
+bazel-out
+bazel-irl-llc
+bazel-testlogs
+*.tfplan
+.aspect
+node_modules
+.build
